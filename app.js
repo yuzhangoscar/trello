@@ -1,22 +1,26 @@
 const draggableOne = document.getElementById('draggable-1');
+const dropzoneOne = document.getElementById('dropzone-1');
 
 function dragstartHandler(event) {
-    let img = new Image();
-    img.src='giphy.gif';
+    console.log('start');
     event.dataTransfer.setData('text/plain', event.target.id);
-    event.dataTransfer.setDragImage(img, 10, 10);
+    event.currentTarget.style.backgroundColor = 'yellow';
 }
 
 function dragoverHandler(event) {
+    console.log('dragging over');
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
 }
 
 function dropHandler(event) {
     event.preventDefault();
-    const data = event.dataTransfer.getData('text/plain');
-    event.target.appendChild();
+    console.log('dropped');
+    const id = event.dataTransfer.getData('text/plain');
+    const draggableElement = document.getElementById(id);
+    event.target.appendChild(draggableElement);
+    event.dataTransfer.clearData();
 }
 
 draggableOne.addEventListener('dragstart', dragstartHandler);
-draggableOne.addEventListener('dragend', ()=> console.log('dragging ends'));
+dropzoneOne.addEventListener('dragover', dragoverHandler);
+dropzoneOne.addEventListener('drop', dropHandler);
