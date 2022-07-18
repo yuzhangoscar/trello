@@ -4,7 +4,7 @@ const draggableThree = document.getElementById('draggable-3');
 const dropzoneOne = document.getElementById('dropzone-1');
 const newTaskButton = document.getElementById('addNewTaskButton');
 const parentZone = document.getElementById('parent');
-const idIndex = 3;
+let idIndex = 3;
 const draggableArray = [];
 
 function dragstartHandler(event) {
@@ -24,6 +24,17 @@ function dropHandler(event) {
     event.dataTransfer.clearData();
 }
 
+function removeEmptyColumn() {
+    let arrayOfColumns = document.getElementsByClassName('example-origin');
+    console.log(arrayOfColumns);
+
+    for (let col of arrayOfColumns)
+        if (col.childElementCount == 0) {
+            console.log(`this element ${col} does not have any children`);
+            col.remove();
+        }
+}
+
 function addNewTaskHandler(event) {
     let newTaskOuterDiv = document.createElement('div');
     let newTaskDiv = document.createElement('div');
@@ -32,10 +43,12 @@ function addNewTaskHandler(event) {
     newTaskDiv.id = idIndex;
     newTaskDiv.setAttribute('draggable', 'true');
     newTaskDiv.innerHTML='draggable';
+    newTaskDiv.addEventListener('dragstart', dragstartHandler);
     newTaskOuterDiv.appendChild(newTaskDiv);
     parentZone.appendChild(newTaskOuterDiv);
     idIndex++;
     draggableArray.push(newTaskDiv);
+    removeEmptyColumn();
 }
 
 draggableOne.addEventListener('dragstart', dragstartHandler);
