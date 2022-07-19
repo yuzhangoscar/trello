@@ -54,6 +54,12 @@ function addNewTaskHandler(event) {
 draggableOne.addEventListener('dragstart', dragstartHandler);
 draggableTwo.addEventListener('dragstart', dragstartHandler);
 draggableThree.addEventListener('dragstart', dragstartHandler);
+draggableOne.addEventListener('dragover', dragoverHandler);
+draggableTwo.addEventListener('dragover', dragoverHandler);
+draggableThree.addEventListener('dragover', dragoverHandler);
+draggableOne.addEventListener('drop', dropHandler);
+draggableTwo.addEventListener('drop', dropHandler);
+draggableThree.addEventListener('drop', dropHandler);
 dropzoneOne.addEventListener('dragover', dragoverHandler);
 dropzoneOne.addEventListener('drop', dropHandler);
 newTaskButton.addEventListener('click', addNewTaskHandler);
